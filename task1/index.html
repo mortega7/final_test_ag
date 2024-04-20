@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="./script.js"></script>
+	</head>
+	<body>
+		<div class="container mx-auto p-6 bg-gray-100">
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-4">
+				<div class="grid gap-4 content-start m-2 pt-2 lg:pt-16">
+					<p class="text-md font-bold">Your industry</p>
+					<p class="text-sm text-gray-400">
+						Choose your industry, or pick Average if you can't find it.
+					</p>
+					<select
+						class="border-2 border-yellow-300 rounded-md w-full text-sm p-1 text-gray-400 italic"
+					>
+						<option value="">Select Industry</option>
+						<option value="Average">Average</option>
+						<option value="Agriculture">Agriculture</option>
+						<option value="Automotive">Automotive</option>
+						<option value="Banking">Banking</option>
+					</select>
+				</div>
+				<div class="grid gap-4 content-start m-2 pt-2 lg:pt-16">
+					<p class="text-md font-bold">Average Deal Size, $</p>
+					<p class="text-sm text-gray-400">
+						Choose the average size of your deals.
+					</p>
+					<input
+						type="range"
+						min="0"
+						max="100"
+						value="0"
+						step="1"
+						class="accent-yellow-500 bg-gray-300 appearance-none w-full h-1 rounded-lg"
+						onchange="calculate(this.value)"
+					/>
+					<div id="rangeContainer" class="-mt-2 relative w-full">
+						<span
+							id="rangeValue"
+							class="text-xs/3 text-gray-600 absolute left-[5px]"
+						></span>
+					</div>
+				</div>
+				<div class="grid gap-4 content-start m-2">
+					<div
+						class="container grid grid-cols-2 mx-auto my-2 bg-white w-1/3 lg:w-1/2 xl:w-1/3 rounded-md"
+					>
+						<div
+							class="mx-1 my-2 p-1 text-center font-semibold rounded-md bg-yellow-500"
+						>
+							B2B
+						</div>
+						<div class="mx-1 my-2 p-1 text-center font-semibold rounded-md">
+							B2C
+						</div>
+					</div>
+					<p class="text-md">
+						<span class="font-bold">B2B</span> lead generation that sees your
+						business through.
+					</p>
+					<div
+						class="grid grid-cols-1 bg-white rounded-md items-center content-center"
+					>
+						<div class="my-6 mx-auto">
+							<span
+								class="text-3xl font-bold text-yellow-400"
+								id="amount"
+							></span>
+							<span class="text-3xl font-semibold text-yellow-300">
+								/ Year</span
+							>
+						</div>
+					</div>
+					<div class="grid grid-cols-2 items-start content-center gap-4">
+						<div class="bg-white rounded-md p-3 h-full">
+							<p class="text-3xl font-bold text-yellow-400">9</p>
+							<p class="text-sm text-gray-700">
+								Approx number of appointment booked / monthly.
+							</p>
+						</div>
+						<div class="bg-white rounded-md p-3 h-full">
+							<p class="text-3xl font-bold text-yellow-400">959%</p>
+							<p class="text-sm text-gray-700">
+								Return on marketing investment.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
