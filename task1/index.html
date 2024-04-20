@@ -1,69 +1,133 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Task #1 - Calculator</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://cdn.tailwindcss.com"></script>
 		<script src="./script.js"></script>
 	</head>
 	<body>
-		<div class="container mx-auto p-6 bg-gray-100">
+		<div class="container mx-auto mt-4 p-12 bg-gray-100">
+			<div class="grid grid-cols-1 lg:grid-cols-2 mb-4 lg:mb-0">
+				<div class="w-full font-semibold text-md lg:text-lg xl:text-xl">
+					To get a better understanding of what your cost and return on
+					investment (ROI) would be depending on your industry, successful
+					conversions, and budget, check out the calculator below.
+				</div>
+			</div>
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-4">
-				<div class="grid gap-4 content-start m-2 pt-2 lg:pt-16">
-					<p class="text-md font-bold">Your industry</p>
-					<p class="text-sm text-gray-400">
-						Choose your industry, or pick Average if you can't find it.
-					</p>
-					<select
-						class="border-2 border-yellow-300 rounded-md w-full text-sm p-1 text-gray-400 italic"
-					>
-						<option value="">Select Industry</option>
-						<option value="Average">Average</option>
-						<option value="Agriculture">Agriculture</option>
-						<option value="Automotive">Automotive</option>
-						<option value="Banking">Banking</option>
-					</select>
-				</div>
-				<div class="grid gap-4 content-start m-2 pt-2 lg:pt-16">
-					<p class="text-md font-bold">Average Deal Size, $</p>
-					<p class="text-sm text-gray-400">
-						Choose the average size of your deals.
-					</p>
-					<input
-						type="range"
-						min="0"
-						max="100"
-						value="0"
-						step="1"
-						class="accent-yellow-500 bg-gray-300 appearance-none w-full h-1 rounded-lg"
-						onchange="calculate(this.value)"
-					/>
-					<div id="rangeContainer" class="-mt-2 relative w-full">
-						<span
-							id="rangeValue"
-							class="text-xs/3 text-gray-600 absolute left-[5px]"
-						></span>
-					</div>
-				</div>
-				<div class="grid gap-4 content-start m-2">
+				<div class="w-full">
 					<div
-						class="container grid grid-cols-2 mx-auto my-2 bg-white w-1/3 lg:w-1/2 xl:w-1/3 rounded-md"
+						class="grid gap-4 content-between mx-2 pt-2 lg:pt-12 lg:h-[175px]"
 					>
-						<div
-							class="mx-1 my-2 p-1 text-center font-semibold rounded-md bg-yellow-500"
+						<p class="text-sm md:text-md font-bold">Your industry</p>
+						<p class="text-xs md:text-sm text-gray-400">
+							Choose your industry, or pick Average if you can't find it.
+						</p>
+						<select
+							class="border-2 border-yellow-300 rounded-md w-full text-sm p-1 text-gray-400 italic"
 						>
-							B2B
-						</div>
-						<div class="mx-1 my-2 p-1 text-center font-semibold rounded-md">
-							B2C
+							<option value="">Select Industry</option>
+							<option value="Average">Average</option>
+							<option value="Agriculture">Agriculture</option>
+							<option value="Automotive">Automotive</option>
+							<option value="Banking">Banking</option>
+						</select>
+					</div>
+					<div class="grid gap-4 content-between mx-2 pt-6 lg:h-[175px]">
+						<p class="text-sm md:text-md font-bold">Number of B2B prospects</p>
+						<p class="text-xs md:text-sm text-gray-400">
+							Choose the number of prospects you want to engage each month.
+						</p>
+						<div>
+							<input
+								id="rangeProspectsValue"
+								type="range"
+								min="0"
+								max="100"
+								value="0"
+								step="1"
+								class="accent-yellow-500 bg-gray-300 appearance-none w-full h-1 rounded-lg"
+								onchange="calculateValue()"
+							/>
+							<div id="rangeProspectsContainer" class="-mt-1 w-full">
+								<span
+									id="rangeProspectsLabel"
+									class="text-xs/3 text-gray-600 pl-[5px]"
+								></span>
+							</div>
 						</div>
 					</div>
-					<p class="text-md">
+				</div>
+				<div class="w-full">
+					<div
+						class="grid gap-4 content-between mx-2 pt-2 lg:pt-12 lg:h-[175px]"
+					>
+						<p class="text-sm md:text-md font-bold">Average Deal Size, $</p>
+						<p class="text-xs md:text-sm text-gray-400">
+							Choose the average size of your deals.
+						</p>
+						<div>
+							<input
+								id="rangeDealValue"
+								type="range"
+								min="0"
+								max="100"
+								value="0"
+								step="1"
+								class="accent-yellow-500 bg-gray-300 appearance-none w-full h-1 rounded-lg"
+								onchange="calculateValue()"
+							/>
+							<div id="rangeDealContainer" class="-mt-1 w-full">
+								<span
+									id="rangeDealLabel"
+									class="text-xs/3 text-gray-600 pl-[5px]"
+								></span>
+							</div>
+						</div>
+					</div>
+					<div class="grid gap-4 content-between mx-2 pt-6 lg:h-[175px]">
+						<p class="text-sm md:text-md font-bold">
+							Close Ratio (after appointment) %
+						</p>
+						<p class="text-xs md:text-sm text-gray-400">
+							To calculate this number, divide the number of sales you made by
+							the number of quotes you sent out.
+						</p>
+						<div>
+							<input
+								id="rangeRatioValue"
+								type="range"
+								min="0"
+								max="100"
+								value="0"
+								step="1"
+								class="accent-yellow-500 bg-gray-300 appearance-none w-full h-1 rounded-lg"
+								onchange="calculateValue()"
+							/>
+							<div id="rangeRatioContainer" class="-mt-1 w-full">
+								<span
+									id="rangeRatioLabel"
+									class="text-xs/3 text-gray-600 pl-[5px]"
+								></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grid gap-4 content-start mx-2">
+					<div
+						class="container grid grid-cols-2 mx-auto bg-white w-1/3 lg:w-1/2 xl:w-1/3 rounded-md font-semibold text-center"
+					>
+						<div class="m-1 p-2 rounded-md bg-yellow-500">B2B</div>
+						<div class="m-1 p-2 rounded-md">B2C</div>
+					</div>
+					<p class="text-sm md:text-md">
 						<span class="font-bold">B2B</span> lead generation that sees your
 						business through.
 					</p>
 					<div
-						class="grid grid-cols-1 bg-white rounded-md items-center content-center"
+						class="grid grid-cols-1 bg-white rounded-md items-center content-center shadow-md"
 					>
 						<div class="my-6 mx-auto">
 							<span
@@ -76,18 +140,22 @@
 						</div>
 					</div>
 					<div class="grid grid-cols-2 items-start content-center gap-4">
-						<div class="bg-white rounded-md p-3 h-full">
+						<div class="bg-white rounded-md p-3 h-full shadow-md">
 							<p class="text-3xl font-bold text-yellow-400">9</p>
-							<p class="text-sm text-gray-700">
-								Approx number of appointment booked / monthly.
+							<p class="text-xs md:text-sm text-gray-700">
+								Approx. number of appointments booked / monthly.
 							</p>
 						</div>
-						<div class="bg-white rounded-md p-3 h-full">
+						<div class="bg-white rounded-md p-3 h-full shadow-md">
 							<p class="text-3xl font-bold text-yellow-400">959%</p>
-							<p class="text-sm text-gray-700">
+							<p class="text-xs md:text-sm text-gray-700">
 								Return on marketing investment.
 							</p>
 						</div>
+					</div>
+					<div class="text-center text-gray-400 text-xs md:text-sm px-3">
+						Each model offers flexible pricing to fit your lead generation
+						needs, and stay within the limits of your budget.
 					</div>
 				</div>
 			</div>
